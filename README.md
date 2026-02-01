@@ -1,6 +1,6 @@
 ## tidbcloud-skills
 
-This repo contains a skill for **TiDB Cloud especially TiDBX** API exploration + YAML scenario generation, plus a small local runner (`tidbcloud-manager`) used by the skill.
+This repo contains a skill for **TiDB Cloud (focusing on TiDBX)** API exploration + YAML scenario generation, plus a small local runner (`tidbcloud-manager`) used by the skill.
 
 Skill source lives in `skills/tidbcloud-manager/`.
 
@@ -8,7 +8,7 @@ Supported AI coding assistants:
 - **Codex CLI** (OpenAI)
 - **OpenCode**
 - **Cursor / Windsurf / antigravity**: configure per their skill docs (no extra files needed from this repo).
- - **Claude Code**: does not use `SKILL.md` directly; configure per Claude Code docs (you can still use the same `tidbcloud-manager` runner and prompts/rules).
+- **Claude Code**: does not use `SKILL.md` directly; configure per Claude Code docs (you can still use the same `tidbcloud-manager` runner and prompts/rules).
 
 ## Setup (venv)
 
@@ -52,12 +52,30 @@ Common locations include:
 - `~/.config/opencode/skill/` (global)
 - `<repo>/.opencode/skill/` (project-local)
 
+Compatibility list (some installations also check these):
+
+- `~/.config/opencode/skill/`
+- `~/.opencode/skill/`
+- `~/.config/opencode/skills/`
+- `~/.opencode/skills/`
+
 Example (global):
 
 ```bash
 mkdir -p ~/.config/opencode/skill
 ln -s "$(pwd)/skills/tidbcloud-manager" ~/.config/opencode/skill/tidbcloud-manager
 ```
+
+Ensure the `tidbcloud-manager` executable is on `PATH` for new OpenCode sessions.
+If you installed into a venv, you can symlink the executable and add it to `PATH`:
+
+```bash
+mkdir -p ~/.opencode/bin
+ln -s "$(pwd)/.venv/bin/tidbcloud-manager" ~/.opencode/bin/tidbcloud-manager
+export PATH="$HOME/.opencode/bin:$PATH"
+```
+
+Tip: add the `export PATH=...` line to your shell rc (e.g. `~/.zshrc`) to make it persistent.
 
 ## Configure credentials (`.env`)
 
@@ -87,6 +105,12 @@ tidbcloud-manager secure-exec http '{"method":"GET","path":"/clusters"}' --sut t
 Or run from repo root (auto-detects `./skills/tidbcloud-manager/`):
 ```bash
 tidbcloud-manager secure-exec http '{"method":"GET","path":"/clusters"}' --sut tidbx
+```
+
+If you run from another directory and see `Cannot locate skill root (missing ./configs)`, set:
+
+```bash
+export TIDBCLOUD_MANAGER_SKILL_DIR="/path/to/skills/tidbcloud-manager"
 ```
 
 Session workflow:
