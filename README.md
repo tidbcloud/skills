@@ -54,7 +54,6 @@ Common locations include:
 
 Compatibility list (some installations also check these):
 
-- `~/.config/opencode/skill/`
 - `~/.opencode/skill/`
 - `~/.config/opencode/skills/`
 - `~/.opencode/skills/`
