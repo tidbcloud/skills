@@ -3,7 +3,7 @@ version: v1
 
 # HTTP API Configuration (no auth)
 connection:
-  host: ${TIDBZERO_HOST:-}
+  host: ${TIDBZERO_HOST:-https://zero.tidbapi.com}
   base_path: ${TIDBZERO_BASE_PATH:-/v1alpha1}
   auth:
     type: none
