@@ -1,5 +1,5 @@
 ## tidbcloud-skills
-
+<!--cla-->
 This repo contains a skill for **TiDB Cloud (focusing on TiDBX)** API exploration + YAML scenario generation, plus a small local runner (`tidbcloud-manager`) used by the skill.
 
 Skill source lives in `skills/tidbcloud-manager/`.
